@@ -23,7 +23,7 @@ return res + '.,:;#'.split('').reverse().map((v,n)=>`<span class="r l${n+1}">${v
       j = 0;
     while(j++<game.size) res +=`<span class="d l${i+1}">${v}</span>`;
     return res;
-  })).join('<br>'));
+  }), '<span id="bump"></span>').join('<br>'));
   var $board = document.getElementById('board');
   game.life = 5;
   game.score = 0;
@@ -55,7 +55,8 @@ return res + '.,:;#'.split('').reverse().map((v,n)=>`<span class="r l${n+1}">${v
   var $g = ev.path[0];
   var g = $g.id;
   if (g === game.queue[0]) {
-    game.score += Number(game.queue.shift().substr(1));
+    (game.score += Number(game.queue.shift().substr(1))) > 32 &&
+    (document.getElementById('bump').innerHTML = game.score);
     $g.innerHTML = '0';
     if ((game.life += 2) > 5)
       game.life = 5;
