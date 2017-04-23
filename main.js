@@ -1,7 +1,7 @@
 (()=>{
 var game = {size:4,queue:[]};
 window.onclick=ev=>{console.log(ev)
-if (ev.path[0].tagName === 'A')
+if (ev.target.tagName === 'A')
   return;
 if (!game.playing) {
   document.getElementsByTagName('h1')[0].classList.add('fade');
@@ -51,8 +51,8 @@ return res + '.,:;#'.split('').reverse().map((v,n)=>`<span class="r l${n+1}">${v
       }
     }
   }, 400);
-} else if (ev.path[0].classList.contains('p')) {
-  var $g = ev.path[0];
+} else if (ev.target.classList.contains('p')) {
+  var $g = ev.target;
   var g = $g.id;
   if (g === game.queue[0]) {
     (game.score += Number(game.queue.shift().substr(1))) > 32 &&
